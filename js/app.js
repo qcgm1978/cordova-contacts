@@ -32,15 +32,14 @@
     // StatusBar.backgroundColorByHexString('#ffffff');
     // StatusBar.styleDefault();
     document.addEventListener('deviceready', function () {
-        callCamera();
-
+        // callCamera();
         window.sqlitePlugin.echoTest(function () {
             console.log('ECHO test OK');
         });
         window.sqlitePlugin.selfTest(function () {
             console.log('SELF test OK');
         });
-        let SQLStringTest = function () {
+        const SQLStringTest = function () {
             var db = window.sqlitePlugin.openDatabase({name: 'test.db', location: 'default'});
             db.transaction(function (tr) {
                 tr.executeSql("SELECT upper('Test string') AS upperString", [], function (tr, rs) {
@@ -49,6 +48,8 @@
             });
         };
         SQLStringTest();
+        $('#media').click(communicateMedia)
+        
         FastClick.attach(document.body);
         if (navigator.notification) { // Override default HTML alert with native dialog
             window.alert = function (message) {
